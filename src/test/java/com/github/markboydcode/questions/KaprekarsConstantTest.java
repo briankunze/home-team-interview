@@ -84,4 +84,14 @@ public class KaprekarsConstantTest {
     assertEquals(sut.calculateIterations(5455), 5, "Wrong number of iterations.");
   }
 
+  @Test
+  public void test_8978() {
+    assertEquals(sut.calculateIterations(8978), 4, "Wrong number of iterations.");
+  }
+
+  @Test
+  public void test_9876() {
+    assertEquals(sut.calculateIterations(9876), 3, "Wrong number of iterations.");
+  }
+
 }

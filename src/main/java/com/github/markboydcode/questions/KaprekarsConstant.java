@@ -43,35 +43,36 @@ public class KaprekarsConstant {
       throw new IllegalArgumentException(TOO_HIGH);
     }
 
-      int count = 0;
+      return calculateIterations(fourDigitNumber, 0);
 
-      while(true){
-        count++;
-        String s =  String.format(FOUR_DIGIT_FORMAT, fourDigitNumber);
+  }
 
-        Integer[] values  = new Integer[4];
+  private int calculateIterations(int fourDigitNumber, int count) {
 
-        for(int j = 0; j < s.length(); j++){
-          String c = s.substring(j,j+1);
-          values[j] = Integer.valueOf(c);
-        }
+      count++;
+      String s =  String.format(FOUR_DIGIT_FORMAT, fourDigitNumber);
+      Integer[] values  = new Integer[4];
 
-        Arrays.sort(values);
-
-        String sLowest = Arrays.stream(values)
-                .map(i -> String.valueOf(i))
-                .collect(Collectors.joining());
-
-        int low = padLeadingZeros(sLowest);
-        int high = padLeadingZeros(new StringBuilder(sLowest).reverse().toString());
-
-        fourDigitNumber = high - low;
-
-        if(fourDigitNumber == THE_CONSTANT)
-          return count;
-
+      for(int j = 0; j < s.length(); j++){
+        String c = s.substring(j,j+1);
+        values[j] = Integer.valueOf(c);
       }
 
+      Arrays.sort(values);
+
+      String sLowest = Arrays.stream(values)
+              .map(i -> String.valueOf(i))
+              .collect(Collectors.joining());
+
+      int low = padLeadingZeros(sLowest);
+      int high = padLeadingZeros(new StringBuilder(sLowest).reverse().toString());
+
+      fourDigitNumber = high - low;
+
+      if(fourDigitNumber == THE_CONSTANT)
+        return count;
+      else
+        return calculateIterations(fourDigitNumber, count);
 
   }
 
